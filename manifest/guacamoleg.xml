@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Local manifest (.repo/local_manifests) for a lineage-24.0 tree: the OnePlus 7 Pro (guacamole) and its common
+     trees and blobs, which guacamoleg builds on. guacamoleg itself and its firmware (extract-radio.sh) are added locally. -->
+<manifest>
+  <remote name="muppets" fetch="https://github.com/TheMuppets" />
+  <project name="LineageOS/android_device_oneplus_guacamole" path="device/oneplus/guacamole" remote="github" revision="lineage-24.0" />
+  <project name="LineageOS/android_device_oneplus_sm8150-common" path="device/oneplus/sm8150-common" remote="github" revision="lineage-24.0" />
+  <project name="LineageOS/android_hardware_oneplus" path="hardware/oneplus" remote="github" revision="lineage-24.0" />
+  <project name="LineageOS/android_hardware_oplus" path="hardware/oplus" remote="github" revision="lineage-24.0" />
+  <project name="LineageOS/android_kernel_oneplus_sm8150" path="kernel/oneplus/sm8150" remote="github" revision="lineage-24.0" />
+  <project name="proprietary_vendor_oneplus_guacamole" path="vendor/oneplus/guacamole" remote="muppets" revision="lineage-24.0" />
+  <project name="proprietary_vendor_oneplus_sm8150-common" path="vendor/oneplus/sm8150-common" remote="muppets" revision="lineage-24.0" />
+</manifest>

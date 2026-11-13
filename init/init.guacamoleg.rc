@@ -1,0 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# The SDX50M 5G modem (an external modem: the bootloader sets ro.boot.baseband=mdm). OxygenOS starts vendor.mdm_helper
+# from init.mdm.sh in class main; sm8150-common defines the service (disabled) but nothing starts it.
+on boot && property:ro.boot.baseband=mdm
+    start vendor.mdm_helper

@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+# On top of guacamole's vendor.prop: the 5G radio settings of the model's last OxygenOS (10.0.15).
+
+# 5G (NR, non-standalone) and the LTE+NR dual connectivity it runs on
+persist.vendor.radio.5g_mode_pref=1
+persist.vendor.radio.force_on_dc=true
+persist.vendor.radio.data_con_rprt=1
+persist.vendor.radio.data_ltd_sys_ind=1
