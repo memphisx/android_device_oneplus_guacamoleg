@@ -1,0 +1,35 @@
+From 0cd6c2037b43535da7ff1313c89f66958735edb5 Mon Sep 17 00:00:00 2001
+From: guacamoleg <guacamoleg@localhost>
+Date: Sat, 14 Nov 2026 13:06:05 +0000
+Subject: [PATCH] sm8150-common: take ks and mdm_helper from guacamoleg, which
+ has its own
+
+---
+ Android.bp | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/Android.bp b/Android.bp
+index 87bfc53..bb867bb 100644
+--- a/Android.bp
++++ b/Android.bp
+@@ -18236,7 +18236,7 @@ cc_prebuilt_binary {
+     target: {
+         android_arm64: {
+             srcs: [
+-                "proprietary/vendor/bin/ks",
++                ":guacamoleg_ks",
+             ],
+             shared_libs: [
+                 "libc",
+@@ -18324,7 +18324,7 @@ cc_prebuilt_binary {
+     target: {
+         android_arm64: {
+             srcs: [
+-                "proprietary/vendor/bin/mdm_helper",
++                ":guacamoleg_mdm_helper",
+             ],
+             shared_libs: [
+                 "libcutils",
+-- 
+2.53.0
+
