@@ -1,0 +1,28 @@
+From fc5a908e37c121cc68560bf176a47a9cb5553f2e Mon Sep 17 00:00:00 2001
+From: guacamoleg <guacamoleg@localhost>
+Date: Sat, 14 Nov 2026 12:59:08 +0000
+Subject: [PATCH] sm8150-common: leave out ks and mdm_helper for guacamoleg,
+ which has its own
+
+---
+ sm8150-common-vendor.mk | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/sm8150-common-vendor.mk b/sm8150-common-vendor.mk
+index 20c185b..99a5576 100644
+--- a/sm8150-common-vendor.mk
++++ b/sm8150-common-vendor.mk
+@@ -882,10 +882,8 @@ PRODUCT_PACKAGES += \
+     imsrcsd \
+     init.qti.chg_policy \
+     irsc_util \
+-    ks \
+     loc_launcher \
+     lowi-server \
+-    mdm_helper \
+     mlid \
+     msm_irqbalance \
+     mutualex \
+-- 
+2.53.0
+
