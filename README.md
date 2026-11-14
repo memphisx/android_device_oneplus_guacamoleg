@@ -11,10 +11,15 @@ PCIe, for 5G. This tree builds on guacamole and changes only what differs:
 - **The SDX50M**: `init.guacamoleg.rc` starts `vendor.mdm_helper`, which loads its firmware and restarts it after a crash
   (sm8150-common ships the helper but nothing starts it). The kernel already has the SDX50M's drivers and device tree.
 - **5G radio settings** from OxygenOS 10.0.15 (`vendor.prop`).
+- **Kernel** (`patches/kernel_oneplus_sm8150`, applied with `patches/apply.sh <tree>` after `repo sync`):
+  - the 5G model's own dtbo overlay (18827, with the SDX50M): its OxygenOS 10 bootloader picks an overlay by
+    `oem,project-id` and `oem,hw-id`, and without one of its own it falls back to the 7 Pro's, which has no 5G modem;
+  - the project number from the OnePlus project info when the bootloader is older than OxygenOS 11: otherwise every
+    driver that asks for it (display, touch, sensors, charging) sees 0, and the touchscreen does not start.
 
 ## Building
 1. A lineage-24.0 tree with `manifest/guacamoleg.xml` in `.repo/local_manifests`, then `repo sync`.
-2. This repo at `device/oneplus/guacamoleg`.
+2. This repo at `device/oneplus/guacamoleg`, then `device/oneplus/guacamoleg/patches/apply.sh <tree>`.
 3. The firmware: `./extract-radio.sh <OTA zip> <tree>` with the OxygenOS 10.0.15 full OTA,
    `OnePlus7ProNROxygen_21.E.31_OTA_031_all_2111271509_64912a56fefe.zip` (MD5 `443079369e983608765e5627f14986bf`).
    It writes `vendor/oneplus/guacamoleg`; the firmware is OnePlus's and is not part of this repo.

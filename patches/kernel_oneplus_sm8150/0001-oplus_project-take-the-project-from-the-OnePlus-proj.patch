@@ -1,0 +1,60 @@
+From 68db6db5f9e4def71a8d78218cb0eaeac37ac52f Mon Sep 17 00:00:00 2001
+From: Kyriakos <memphisx@gmail.com>
+Date: Sat, 14 Nov 2026 02:16:41 +0000
+Subject: [PATCH 1/2] oplus_project: take the project from the OnePlus project
+ info on older bootloaders
+
+Change-Id: Ie26d6b89093d730463d86839b4c4a168475d481f
+---
+ .../system/oplus_project/qcom/oplus_project.c | 28 +++++++++++++++++++
+ 1 file changed, 28 insertions(+)
+
+diff --git a/drivers/soc/oplus/system/oplus_project/qcom/oplus_project.c b/drivers/soc/oplus/system/oplus_project/qcom/oplus_project.c
+index 81ef49caffe6..5dc79ec88b89 100644
+--- a/drivers/soc/oplus/system/oplus_project/qcom/oplus_project.c
++++ b/drivers/soc/oplus/system/oplus_project/qcom/oplus_project.c
+@@ -88,6 +88,33 @@ static struct pcb_match pcb_str[] = {
+ struct proc_dir_entry *oplus_info = NULL;
+ struct proc_dir_entry *oplus_info_temp = NULL;
+ 
++/*
++ * Bootloaders older than OxygenOS 11 do not fill SMEM_PROJECT (135), only the OnePlus project info (136), whose first
++ * field is the project number as text. Without this every get_project() caller sees 0. The OnePlus 7 Pro 5G (18827)
++ * is a OnePlus 7 Pro (18821) with a second modem: its display, touch, sensors and charging take the 7 Pro's paths.
++ */
++#define SMEM_PROJECT_INFO_OEM	136
++static ProjectInfoOCDT oem_project;
++
++static void init_project_version_oem(void)
++{
++    size_t size;
++    char name[9] = {0};
++    unsigned int prj;
++    void *info = qcom_smem_get(QCOM_SMEM_HOST_ANY, SMEM_PROJECT_INFO_OEM, &size);
++
++    if (IS_ERR_OR_NULL(info) || size < 8)
++        return;
++    memcpy(name, info, 8);
++    if (kstrtouint(name, 10, &prj))
++        return;
++    if (prj == 18827)
++        prj = 18821;
++    oem_project.nDataBCDT.ProjectNo = prj;
++    g_project = &oem_project;
++    pr_err("project %s from the OnePlus project info: %u\n", name, prj);
++}
++
+ static void init_project_version(void)
+ {
+     /*for qcom's smem*/
+@@ -106,6 +133,7 @@ static void init_project_version(void)
+         &smem_size);
+         if (IS_ERR(smem_addr)) {
+             pr_err("unable to acquire smem SMEM_PROJECT entry\n");
++            init_project_version_oem();
+             return;
+         }
+ 
+-- 
+2.53.0
+

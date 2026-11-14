@@ -1,0 +1,73 @@
+From f66d810d2374af6697e2d1150d7b808003f0bf1c Mon Sep 17 00:00:00 2001
+From: Kyriakos <memphisx@gmail.com>
+Date: Sat, 14 Nov 2026 02:16:41 +0000
+Subject: [PATCH 2/2] arm64: dts: 18821: add the OnePlus 7 Pro 5G (18827)
+ overlay with the SDX50M
+
+Change-Id: Ib3edd0f0ea7cfa85f20c99f41b845b4d5aea504e
+---
+ arch/arm64/boot/dts/18821/Makefile            |  2 ++
+ .../18821/sm8150-sdx50m-mtp-18827-overlay.dts | 36 +++++++++++++++++++
+ 2 files changed, 38 insertions(+)
+ create mode 100644 arch/arm64/boot/dts/18821/sm8150-sdx50m-mtp-18827-overlay.dts
+
+diff --git a/arch/arm64/boot/dts/18821/Makefile b/arch/arm64/boot/dts/18821/Makefile
+index 988a5286ee2e..eca27b962ecb 100644
+--- a/arch/arm64/boot/dts/18821/Makefile
++++ b/arch/arm64/boot/dts/18821/Makefile
+@@ -1,8 +1,10 @@
+ ifeq ($(CONFIG_BUILD_ARM64_DT_OVERLAY),y)
+     dtbo-$(CONFIG_ARCH_SM8150) += sm8150-mtp-overlay.dtbo
++    dtbo-$(CONFIG_ARCH_SM8150) += sm8150-sdx50m-mtp-18827-overlay.dtbo
+ 
+ 
+     sm8150-mtp-overlay.dtbo-base := sm8150.dtb sm8150-v2.dtb sm8150p.dtb sm8150p-v2.dtb
++    sm8150-sdx50m-mtp-18827-overlay.dtbo-base := sm8150.dtb sm8150-v2.dtb sm8150p.dtb sm8150p-v2.dtb
+ 
+ else
+ dtb-$(CONFIG_ARCH_SM8150) += 	sm8150-v2-mtp.dtb
+diff --git a/arch/arm64/boot/dts/18821/sm8150-sdx50m-mtp-18827-overlay.dts b/arch/arm64/boot/dts/18821/sm8150-sdx50m-mtp-18827-overlay.dts
+new file mode 100644
+index 000000000000..1328a7076e02
+--- /dev/null
++++ b/arch/arm64/boot/dts/18821/sm8150-sdx50m-mtp-18827-overlay.dts
+@@ -0,0 +1,36 @@
++/*
++ * SPDX-License-Identifier: GPL-2.0-only
++ * OnePlus 7 Pro 5G (18827): the OnePlus 7 Pro (18821) with the SDX50M 5G modem on PCIe.
++ * Its bootloader (OxygenOS 10) picks an overlay by qcom,board-id with oem,project-id and oem,hw-id,
++ * as OnePlus's own dtbo did (hardware revisions 11 to 22); the oplus,* fields are for newer bootloaders.
++ */
++
++/dts-v1/;
++/plugin/;
++
++#include <dt-bindings/clock/qcom,gcc-sm8150.h>
++#include <dt-bindings/clock/qcom,camcc-sm8150.h>
++#include <dt-bindings/clock/qcom,rpmh.h>
++#include <dt-bindings/interrupt-controller/arm-gic.h>
++
++#include "sm8150-mtp.dtsi"
++#include "sdx5xm-external-soc.dtsi"
++#include "sm8150-sdx50m.dtsi"
++#include "sm8150-mtp-audio-overlay.dtsi"
++
++#include "sm8150-oem.dtsi"
++#include "sm8150-oem-camera-t0.dtsi"
++#include "guacamole.dtsi"
++#include "guacamole_sm8150.dtsi"
++#include "guacamole_t0.dtsi"
++#include "guacamole_sdx50m.dtsi"
++
++/ {
++	model = "SDX50M MTP 18827";
++	compatible = "qcom,sm8150-mtp", "qcom,sm8150", "qcom,mtp";
++	qcom,board-id = <0x1010008 0x1>;
++	oem,project-id = <18827>;
++	oem,hw-id = <11 12 13 14 15 21 22>;
++	oplus,dtsi_no = <18827>;
++	oplus,pcb_range = <0 55>;
++};
+-- 
+2.53.0
+
