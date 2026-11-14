@@ -21,6 +21,8 @@ TARGET_SCREEN_DENSITY := 560
 # Kernel
 BOARD_KERNEL_CMDLINE += androidboot.boot_devices=soc/1d84000.ufshc
 TARGET_KERNEL_CONFIG += vendor/oplus_non_dynamic.config
+# The SDX50M's driver (esoc), which oplus.config turns off (patches/kernel_oneplus_sm8150)
+TARGET_KERNEL_CONFIG += vendor/guacamoleg.config
 
 # Partitions (the same as the OnePlus 7 Pro)
 BOARD_BOOTIMAGE_PARTITION_SIZE := 100663296
