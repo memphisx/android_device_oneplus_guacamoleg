@@ -6,3 +6,6 @@ persist.vendor.radio.5g_mode_pref=1
 persist.vendor.radio.force_on_dc=true
 persist.vendor.radio.data_con_rprt=1
 persist.vendor.radio.data_ltd_sys_ind=1
+
+# Network types: sm8150-common's 22 (LTE, 3G, 2G) plus 5G, so Android allows NR and Settings offers it (33)
+ro.telephony.default_network=33

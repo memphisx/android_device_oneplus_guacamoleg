@@ -34,6 +34,8 @@ BOARD_VENDORIMAGE_PARTITION_SIZE := 1073741824
 # Properties
 TARGET_PRODUCT_PROP += $(GUACAMOLE_PATH)/product.prop
 TARGET_VENDOR_PROP += $(GUACAMOLE_PATH)/vendor.prop $(DEVICE_PATH)/vendor.prop
+# vendor.prop replaces sm8150-common's ro.telephony.default_network (with 5G)
+BUILD_BROKEN_DUP_SYSPROP := true
 
 # Recovery
 BOARD_USES_RECOVERY_AS_BOOT := true
