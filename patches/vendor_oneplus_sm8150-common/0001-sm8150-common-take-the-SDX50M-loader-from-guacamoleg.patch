@@ -1,0 +1,62 @@
+From 3e1d6c627248a20a5bf7bd2861bdd0483f3908e8 Mon Sep 17 00:00:00 2001
+From: guacamoleg <guacamoleg@localhost>
+Date: Sat, 14 Nov 2026 13:06:05 +0000
+Subject: [PATCH] sm8150-common: take the SDX50M loader from guacamoleg, which
+ has its own
+
+---
+ Android.bp | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/Android.bp b/Android.bp
+index 87bfc53..c47ff54 100644
+--- a/Android.bp
++++ b/Android.bp
+@@ -1687,7 +1687,7 @@ cc_prebuilt_library_shared {
+     target: {
+         android_arm: {
+             srcs: [
+-                "proprietary/vendor/lib/libmdmdetect.so",
++                ":guacamoleg_libmdmdetect32",
+             ],
+             shared_libs: [
+                 "libcutils",
+@@ -1701,7 +1701,7 @@ cc_prebuilt_library_shared {
+         },
+         android_arm64: {
+             srcs: [
+-                "proprietary/vendor/lib64/libmdmdetect.so",
++                ":guacamoleg_libmdmdetect64",
+             ],
+             shared_libs: [
+                 "libcutils",
+@@ -9630,7 +9630,7 @@ cc_prebuilt_library_shared {
+     target: {
+         android_arm64: {
+             srcs: [
+-                "proprietary/vendor/lib64/libmdmimgload.so",
++                ":guacamoleg_libmdmimgload64",
+             ],
+             shared_libs: [
+                 "libcutils",
+@@ -18236,7 +18236,7 @@ cc_prebuilt_binary {
+     target: {
+         android_arm64: {
+             srcs: [
+-                "proprietary/vendor/bin/ks",
++                ":guacamoleg_ks",
+             ],
+             shared_libs: [
+                 "libc",
+@@ -18324,7 +18324,7 @@ cc_prebuilt_binary {
+     target: {
+         android_arm64: {
+             srcs: [
+-                "proprietary/vendor/bin/mdm_helper",
++                ":guacamoleg_mdm_helper",
+             ],
+             shared_libs: [
+                 "libcutils",
+-- 
+2.53.0
+
