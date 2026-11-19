@@ -31,10 +31,11 @@ PCIe, for 5G. This tree builds on guacamole and changes only what differs:
 
 ## Status
 Tested on a GM1920 (EEA) over OxygenOS 10.0.15 firmware:
-- works: boot, touch, display, 4G calls (VoLTE), SMS, mobile data;
+- works: boot, touch, display, 4G calls (VoLTE), SMS, mobile data, Wi-Fi, audio, camera, sensors (all 38 report);
 - the SDX50M starts (firmware loaded, esoc0 up) and reports 5G, and Settings offers 5G; it has not yet connected to 5G
-  where another phone on the same network does: next is the modem's view of 5G cells, with more logging.
-- not yet checked: Wi-Fi, Bluetooth, audio, camera, sensors, fingerprint.
+  where another phone on the same network does: next is the modem's view of 5G cells, with more logging;
+- Bluetooth turns on, but pairing is untested;
+- the fingerprint sensor's service starts without errors, but enrolling a finger is untested.
 
 Installing over OxygenOS: flash the images from the zip's payload with fastboot (the boot, dtbo and vbmeta built
 alongside it are not the ones in the zip), or flash its boot as the recovery and sideload the zip; then format data.
